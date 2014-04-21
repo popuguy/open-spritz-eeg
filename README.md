@@ -1,0 +1,1 @@
+This is a modified version of OpenSpritz to allow on-the-fly WPM changes with a JavaScript function. This change is intended for potential interface with an EEG device.
