@@ -6,6 +6,9 @@
 // Please don't abuse this.
 var readability_token = '172b057cd7cfccf27b60a36f16b1acde12783893';
 var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
+var eeg_threshold = 0;
+var eeg_refresh_interval = 9999999; //giant temporary value
+var eeg_change = 0;
 
 function create_spritz(){
     var ms_per_word;
@@ -38,6 +41,18 @@ function create_spritz(){
     };
 
     return spritz_loader();
+}
+
+function getEEGValue() {
+    //will return the value to compare to the threshold through whatever means eventually
+    return 0;
+}
+
+function increaseWPM(eeg_val) {
+    if (eeg_val > eeg_threshold) {
+        return true;
+    }
+    return false;
 }
 
 function updateWPM(wpm) {
@@ -170,6 +185,14 @@ function spritzify(input){
                 stopSpritz();
             }
         }, ms_per_word));
+        
+        spritz_timers.push(setInterval(function() {
+            if (increaseWPM(getEEGValue())) {
+                ms_per_word += eeg_change;
+            } else {
+                ms_per_word -= eeg_change;
+            }
+        }, eeg_refresh_interval))
     }
 
     function stopSpritz() {
