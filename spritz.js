@@ -69,6 +69,9 @@ function increaseWPM(eeg_val) {
 function updateWPM(wpm) {
     ms_per_word = 60000/wpm;
 }
+function addToWPM(wpm) {
+    ms_per_word = 60000 / ((60000 / ms_per_word) + wpm)
+}
 
 function getURL(url, callback) {
     var xmlhttp = new XMLHttpRequest();
@@ -112,6 +115,7 @@ function spritzify(input){
 
     var wpm = parseInt(document.getElementById("spritz_selector").value, 10);
     ms_per_word = 60000/wpm;
+    document.getElementById("wpm_counter").textContent = wpm;
     init_ms_per_word = ms_per_word;
 
     // Split on any spaces.
@@ -199,10 +203,12 @@ function spritzify(input){
         
         spritz_timers.push(setInterval(function() {
             if (increaseWPM(getEEGValue())) {
-                ms_per_word += eeg_change;
-                alert(document.getElementById("wpm_counter").textContent)
+                addToWPM(eeg_change);
+                //ms_per_word += eeg_change;
+                document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
             } else {
-                ms_per_word -= eeg_change;
+                addToWPM(-1 * eeg_change);
+                document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
             }
         }, eeg_refresh_interval))
     }
