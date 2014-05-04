@@ -18,7 +18,6 @@ function create_spritz(){
             dec_wpm = true;
         }
         else if(event.keyCode == 39) {
-            alert("sdf");
             inc_wpm = true;
         }
     });
