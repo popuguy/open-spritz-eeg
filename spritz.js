@@ -8,9 +8,19 @@ var readability_token = '172b057cd7cfccf27b60a36f16b1acde12783893';
 var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 var eeg_threshold = 0;
 var eeg_refresh_interval = 9999999; //giant temporary value
-var eeg_change = 0;
+var eeg_change = 50;
+var inc_wpm = false;
+var dec_wpm = false;
 
 function create_spritz(){
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 37) {
+            dec_wpm = true;
+        }
+        else if(event.keyCode == 39) {
+            inc_wpm = true;
+        }
+    });
     var ms_per_word;
     var init_ms_per_word;
      spritz_loader = function() {
@@ -22,7 +32,7 @@ function create_spritz(){
         //getURL("spritz.html", function(data){
 
         //getURL("https://rawgithub.com/Miserlou/OpenSpritz/dev/spritz.html", function(data){
-        getURL("spritz.html", function(data){
+        getURL("https://rawgit.com/Miserlou/OpenSpritz/dev/spritz.html", function(data){
             var spritzContainer = document.getElementById("spritz_container");
 
             if (!spritzContainer) {
@@ -49,7 +59,8 @@ function getEEGValue() {
 }
 
 function increaseWPM(eeg_val) {
-    if (eeg_val > eeg_threshold) {
+    if (eeg_val > eeg_threshold || inc_wpm) {
+        inc_wpm = false;
         return true;
     }
     return false;
