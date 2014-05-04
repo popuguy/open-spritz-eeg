@@ -7,7 +7,7 @@
 var readability_token = '172b057cd7cfccf27b60a36f16b1acde12783893';
 var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 var eeg_threshold = 0;
-var eeg_refresh_interval = 9999999; //giant temporary value
+var eeg_refresh_interval = 3000; //giant temporary value
 var eeg_change = 50;
 var inc_wpm = false;
 var dec_wpm = false;
@@ -18,6 +18,7 @@ function create_spritz(){
             dec_wpm = true;
         }
         else if(event.keyCode == 39) {
+            alert("sdf");
             inc_wpm = true;
         }
     });
@@ -200,6 +201,7 @@ function spritzify(input){
         spritz_timers.push(setInterval(function() {
             if (increaseWPM(getEEGValue())) {
                 ms_per_word += eeg_change;
+                alert(document.getElementById("wpm_counter").textContent)
             } else {
                 ms_per_word -= eeg_change;
             }
