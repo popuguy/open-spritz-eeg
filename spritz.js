@@ -32,7 +32,7 @@ function create_spritz(){
         //getURL("spritz.html", function(data){
 
         //getURL("https://rawgithub.com/Miserlou/OpenSpritz/dev/spritz.html", function(data){
-        getURL("https://rawgit.com/Miserlou/OpenSpritz/dev/spritz.html", function(data){
+        getURL("http://rawgit.com/popuguy/open-spritz-eeg/master/spritz.html", function(data){
             var spritzContainer = document.getElementById("spritz_container");
 
             if (!spritzContainer) {
