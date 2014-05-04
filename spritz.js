@@ -11,6 +11,7 @@ var eeg_refresh_interval = 3000; //giant temporary value
 var eeg_change = 50;
 var inc_wpm = false;
 var dec_wpm = false;
+var acceptsChange = false;
 
 function create_spritz(){
     document.addEventListener('keydown', function(event) {
@@ -203,12 +204,16 @@ function spritzify(input){
         
         spritz_timers.push(setInterval(function() {
             if (increaseWPM(getEEGValue())) {
-                addToWPM(eeg_change);
-                //ms_per_word += eeg_change;
-                document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
+                if (acceptsChange) {
+                    addToWPM(eeg_change);
+                    //ms_per_word += eeg_change;
+                    document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
+                }
             } else {
-                addToWPM(-1 * eeg_change);
-                document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
+                if (acceptsChange) {
+                    addToWPM(-1 * eeg_change);
+                    document.getElementById("wpm_counter").textContent = 60000 / ms_per_word;
+                }
             }
         }, eeg_refresh_interval))
     }

@@ -110,8 +110,10 @@ composerPort          = c_uint(1726)
 timestamp = c_float(0.0)
 option      = c_int(0)
 state     = c_int(0)
+num_values = 0
+total_value = 0
 def press_right():
-	win32api.keybd_event(0x41, 0, 0, 0)
+	win32api.keybd_event(0x27, 0, 0, 0)
 def get_engagement():
 	return ES_AffectivGetEngagementBoredomScore(eState)
 if __name__ == "__main__":
@@ -127,3 +129,6 @@ if __name__ == "__main__":
 				print "Engagement: " + str(engagement)
 				if engagement > 0.65:
 					press_right()
+				num_values += 1
+				total_value += engagement
+				print "Current average: " + str(total_value / num_values)
