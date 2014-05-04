@@ -1,0 +1,24 @@
+<html>
+<body>
+	<p id="myParagraph">
+		Goodbye.
+	</p>
+</body>
+<script>
+var contentFromFile = "";
+var file = new XMLHttpRequest();
+//alert(location.href);
+file.open("GET", "test.txt", true);
+file.onreadystatechange = function ()
+{
+	if (file.readyState == 4) {
+		if (file.status == 200 || file.status == 0) {
+			contentFromFile = file.responseText;
+			alert("hello");
+		}
+	}
+}
+document.getElementById("myParagraph").textContent = "Hello.";
+document.getElementById("myParagraph").textContent = contentFromFile;
+</script>
+</html>
