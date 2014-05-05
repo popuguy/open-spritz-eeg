@@ -11,7 +11,7 @@ var eeg_refresh_interval = 3000; //giant temporary value
 var eeg_change = 50;
 var inc_wpm = false;
 var dec_wpm = false;
-var acceptsChange = false;
+var acceptsChange = true;
 
 function create_spritz(){
     document.addEventListener('keydown', function(event) {

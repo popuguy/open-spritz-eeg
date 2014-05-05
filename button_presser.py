@@ -127,7 +127,7 @@ if __name__ == "__main__":
 				libEDK.EE_EmoEngineEventGetEmoState(eEvent,eState)
 				engagement = get_engagement()
 				print "Engagement: " + str(engagement)
-				if engagement > 0.65:
+				if engagement < 0.63:
 					press_right()
 				num_values += 1
 				total_value += engagement
