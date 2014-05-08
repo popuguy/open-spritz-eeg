@@ -71,7 +71,7 @@ function updateWPM(wpm) {
     ms_per_word = 60000/wpm;
 }
 function addToWPM(wpm) {
-    ms_per_word = 60000 / ((60000 / ms_per_word) + wpm)
+    ms_per_word = 60000 / ((60000 / ms_per_word) + wpm);
 }
 
 function getURL(url, callback) {
